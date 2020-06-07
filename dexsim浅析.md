@@ -5,6 +5,13 @@ tag: dex字符串解密
 category: Android逆向
 ---
 
+<!-- TOC -->
+
+- [dexsim简介](#dexsim简介)
+  - [dexsim 源码浅析](#dexsim-源码浅析)
+
+<!-- /TOC -->
+
 # dexsim简介
 [dexsim](https://github.com/mikusjelly/dexsim) 是利用动态调用实现字符串解密的工具，需要配合 [DSS](https://github.com/mikusjelly/DSS) 使用。作者为 `mikusjelly` 。
 
