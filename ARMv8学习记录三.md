@@ -20,10 +20,8 @@ if(x >= 0){
 
 double i = argc / 4;
 ```
-
-MOV             W20, W0
-ADD             W8, W20, #3
-CMP             W20, #0
-CSEL            W8, W8, W20, LT
-ASR             W21, W8, #2
+ADD             W8, W0, #3          
+CMP             W0, #0
+CSEL            W8, W8, W0, LT
+ASR             W1, W8, #2
 ```
