@@ -8,6 +8,8 @@ category: Android逆向
 最近分析Geost家族银行木马，记录一下该木马字符串解密插件编写。
 > 样本来源：https://blog.trendmicro.com/trendlabs-security-intelligence/dissecting-geost-exposing-the-anatomy-of-the-android-trojan-targeting-russian-banks/
 
+[样本下载](dexsim插件-Geost/92394e82d9cf5de5cb9c7ac072e774496bd1c7e2944683837d30b188804c1810)
+
 # 分析字符串解密特点
 首先查看样本中解密字符串方法的特点
 

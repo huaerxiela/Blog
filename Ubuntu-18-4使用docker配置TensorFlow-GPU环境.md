@@ -18,7 +18,7 @@ category: TensorFlow
     - [3. 添加Docker的官方GPG密钥：](#3-添加docker的官方gpg密钥)
     - [4. 使用以下命令来设置稳定的存储库。](#4-使用以下命令来设置稳定的存储库)
   - [2. 安装DOCKER ENGINE-社区](#2-安装docker-engine-社区)
-    - [1. 更新apt包索引。](#1-更新apt包索引)
+    - [1. 更新apt包索引。](#1-更新apt包索引-1)
     - [2. 安装最新版本的Docker Engine-Community和containerd，或者转到下一步安装特定版本：](#2-安装最新版本的docker-engine-community和containerd或者转到下一步安装特定版本)
     - [3. 要安装特定版本的Docker Engine-Community，请在存储库中列出可用版本，然后选择并安装：](#3-要安装特定版本的docker-engine-community请在存储库中列出可用版本然后选择并安装)
     - [4. 通过运行hello-world 映像来验证是否正确安装了Docker Engine-Community 。](#4-通过运行hello-world-映像来验证是否正确安装了docker-engine-community-)
@@ -35,6 +35,7 @@ category: TensorFlow
     - [2. 环境测试](#2-环境测试)
     - [3. 使用最新的 TensorFlow GPU 映像在容器中启动 bash shell 会话](#3-使用最新的-tensorflow-gpu-映像在容器中启动-bash-shell-会话)
 - [五、通过软链接修改Docker配置本地镜像与容器的存储位置](#五通过软链接修改docker配置本地镜像与容器的存储位置)
+- [六、使用非root用户运行docker](#六使用非root用户运行docker)
 
 <!-- /TOC -->
 # 一、安装nvidia显卡驱动
@@ -263,5 +264,27 @@ $ sudo ln -s /root/data/docker /var/lib/docker
 ```
 这时候启动Docker时发现存储目录依旧是/var/lib/docker，但是实际上是存储在数据盘的，你可以在数据盘上看到容量变化。
 
+# 六、使用非root用户运行docker
+默认情况下，docker 命令会使用 Unix socket 与 Docker 主机通讯，安装完docker主机后默认会创建一个docke用户组。而只有 root 用户和 docker 组的用户才可以访问 Docker 主机的 Unix socket，所以需要把linux非root用户添加到docker组才能直接访问docker 主机。步骤如下：
+
+1. 如果没有创建docker用户组，则需要先创建一个docket用户组。
+```
+$ sudo groupadd docker
+```
+
+2. 将指定的用户添加到docker用户组。
+```
+$ sudo usermod -aG docker userName
+```
+3. 重启docker服务
+```
+$ sudo service docker restart //或者 
+$ sudo /etc/init.d/docker restart
+```
+
+4. 然后注销重登陆使用户组生效，或者使用以下命令直接登陆到docker组中。
+```
+ $ newgrp - docker //切换到docker用户组
+```
 > 参考：https://blog.csdn.net/wenwenxiong/article/details/78728696
 
